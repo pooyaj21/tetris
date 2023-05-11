@@ -1,32 +1,36 @@
-PShape s;
-int squerSize =50;
+Shape shape;
+
 int spawnX=50;
 int spawnY=50;
+int tetrisGod;
+
 void setup() {
-  size(600, 900);
-  background(0);
-  drawSquer();
+  size(650, 900);
+  shape = new Shape();
 }
 
 void draw() {
-  straight();
+
+  background(0);
+  Grid();
+  shape.display();
+  shape.moving();
 }
 
-void drawSquer() {
-  s = createShape();
-  s.beginShape();
-  s.stroke(255);
-  s.fill(0, 0, 255);
-  s.vertex(0, 0);
-  s.vertex(0, squerSize);
-  s.vertex(squerSize, squerSize);
-  s.vertex(squerSize, 0);
-  s.endShape(CLOSE);
+void keyPressed() {
+  if (keyCode == RIGHT || key == 'd'||key == 'D') {
+    shape.move("r");
+  }
+  if (keyCode == LEFT || key == 'a'||key == 'A') {
+    shape.move("l");
+  }
+  if (keyCode == DOWN || key == 's'||key == 'S') {
+    shape.move("d");
+  }
 }
 
-void straight(){
- shape(s, spawnX, spawnY);
- shape(s, spawnX,spawnY+squerSize);
- shape(s, spawnX,spawnY+2*(squerSize));
- shape(s, spawnX,spawnY+3*(squerSize));
+void keyReleased(){
+    if (keyCode == UP || key == 'w'||key == 'W') {
+    shape.rotate();
+  }
 }
