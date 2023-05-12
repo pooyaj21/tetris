@@ -3,18 +3,18 @@ import java.util.Arrays;
 class Shape {
   int squerSize =height/20;
   Shape newShape;
-  private int [][] o = {{0, 0}, {1, 0}, {0, 1}, {1, 1}};
-  private int [][] i = {{0, 0}, {1, 0}, {2, 0}, {3, 0}};
-  private int [][] t = {{0, 0}, {1, 0}, {2, 0}, {1, 1}};
-  private int [][] j = {{0, 2}, {1, 0}, {1, 1}, {1, 2}};
-  private int [][] l = {{0, 0}, {0, 1}, {0, 2}, {1, 2}};
-  private int [][] s = {{0, 1}, {1, 0}, {1, 1}, {2, 0}};
-  private int [][] z = {{0, 0}, {1, 0}, {1, 1}, {2, 1}};
+  private int [][] o = {{4, 0}, {5, 0}, {4, 1}, {5, 1}};
+  private int [][] i = {{3, 0}, {4, 0}, {5, 0}, {6, 0}};
+  private int [][] t = {{3, 1}, {4, 1}, {5, 1}, {4, 0}};
+  private int [][] j = {{3, 0}, {3, 1}, {4, 1}, {5, 1}};
+  private int [][] l = {{3, 1}, {4, 1}, {5, 1}, {5, 0}};
+  private int [][] s = {{3, 1}, {4, 0}, {4, 1}, {5, 0}};
+  private int [][] z = {{3, 0}, {4, 0}, {4, 1}, {5, 1}};
   private int [][][] piece = { o, i, t, j, l, s, z};
   private int [][][] pieceRotate = { o, i, t, j, l, s, z};
   private color [] pieceColor = {#cdcd00, #00cdcd, #9a00cd, #0000cd, #cd6600, #00cd00, #cd0000};
   private int rotateCount=0;
-
+//int tetrisGod =0; //debug
   int tetrisGod =(int)random(7);
   int time=1;
 
@@ -52,7 +52,7 @@ class Shape {
   void rotate() {
     if ( checkCollision("r")&&checkCollision("l")&&checkCollision("d") ) {
     if (tetrisGod!=0){
-    for (int j=0; j<2; j++) {
+    for (int j=0; j<1; j++) {
     int [][][] rotated = new int[7][4][2];
     if (rotateCount%4==0){
       for (int i=0; i<4; i++) {
@@ -102,6 +102,12 @@ class Shape {
       }
     }
     return true;
+  }
+  
+  void collisionForRotate(int piece) {
+    if(piece==1){
+      
+    }
   }
 
   void moving () {
