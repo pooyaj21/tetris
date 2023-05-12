@@ -14,7 +14,7 @@ class Shape {
   private int [][][] pieceRotate = { o, i, t, j, l, s, z};
   private color [] pieceColor = {#cdcd00, #00cdcd, #9a00cd, #0000cd, #cd6600, #00cd00, #cd0000};
   private int rotateCount=0;
-//int tetrisGod =0; //debug
+  //int tetrisGod =0; //debug
   int tetrisGod =(int)random(7);
   int time=1;
 
@@ -51,37 +51,37 @@ class Shape {
 
   void rotate() {
     if ( checkCollision("r")&&checkCollision("l")&&checkCollision("d") ) {
-    if (tetrisGod!=0){
-    for (int j=0; j<1; j++) {
-    int [][][] rotated = new int[7][4][2];
-    if (rotateCount%4==0){
-      for (int i=0; i<4; i++) {
-        rotated[tetrisGod][i][0] = pieceRotate[tetrisGod][i][1]-piece[tetrisGod][1][0];
-        rotated[tetrisGod][i][1] = -pieceRotate[tetrisGod][i][0]-piece[tetrisGod][1][1];
+      if (tetrisGod!=0) {
+        for (int j=0; j<2; j++) {
+          int [][][] rotated = new int[7][4][2];
+          if (rotateCount%4==0) {
+            for (int i=0; i<4; i++) {
+              rotated[tetrisGod][i][0] = pieceRotate[tetrisGod][i][1]-piece[tetrisGod][1][0];
+              rotated[tetrisGod][i][1] = -pieceRotate[tetrisGod][i][0]-piece[tetrisGod][1][1];
+            }
+          }
+          if (rotateCount%4==1) {
+            for (int i=0; i<4; i++) {
+              rotated[tetrisGod][i][0] = -pieceRotate[tetrisGod][i][0]-piece[tetrisGod][1][0];
+              rotated[tetrisGod][i][1] = -pieceRotate[tetrisGod][i][1]-piece[tetrisGod][1][1];
+            }
+          }
+          if (rotateCount%4==2) {
+            for (int i=0; i<4; i++) {
+              rotated[tetrisGod][i][0] = -pieceRotate[tetrisGod][i][1]-piece[tetrisGod][1][0];
+              rotated[tetrisGod][i][1] = pieceRotate[tetrisGod][i][0]-piece[tetrisGod][1][1];
+            }
+          }
+          if (rotateCount%4==3) {
+            for (int i=0; i<4; i++) {
+              rotated[tetrisGod][i][0] = pieceRotate[tetrisGod][i][0]-piece[tetrisGod][1][0];
+              rotated[tetrisGod][i][1] = pieceRotate[tetrisGod][i][1]-piece[tetrisGod][1][1];
+            }
+          }
+          piece = rotated ;
+        }
+        rotateCount++;
       }
-    }
-    if (rotateCount%4==1){
-      for (int i=0; i<4; i++) {
-        rotated[tetrisGod][i][0] = -pieceRotate[tetrisGod][i][0]-piece[tetrisGod][1][0];
-        rotated[tetrisGod][i][1] = -pieceRotate[tetrisGod][i][1]-piece[tetrisGod][1][1];
-      }
-    }
-    if (rotateCount%4==2){
-      for (int i=0; i<4; i++) {
-        rotated[tetrisGod][i][0] = -pieceRotate[tetrisGod][i][1]-piece[tetrisGod][1][0];
-        rotated[tetrisGod][i][1] = pieceRotate[tetrisGod][i][0]-piece[tetrisGod][1][1];
-      }
-    }
-      if (rotateCount%4==3){
-      for (int i=0; i<4; i++) {
-        rotated[tetrisGod][i][0] = pieceRotate[tetrisGod][i][0]-piece[tetrisGod][1][0];
-        rotated[tetrisGod][i][1] = pieceRotate[tetrisGod][i][1]-piece[tetrisGod][1][1];
-      }
-    }
-    piece = rotated ;
-    }
-    rotateCount++;
-    }
     }
   }
 
@@ -103,10 +103,9 @@ class Shape {
     }
     return true;
   }
-  
+
   void collisionForRotate(int piece) {
-    if(piece==1){
-      
+    if (piece==1) {
     }
   }
 
