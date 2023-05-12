@@ -106,6 +106,7 @@ class Shape {
 
   void collisionForRotate(int piece) {
     if (piece==1) {
+      //TODO: rotation
     }
   }
 
