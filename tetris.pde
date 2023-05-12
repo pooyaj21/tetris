@@ -14,7 +14,7 @@ void draw() {
   background(0);
   Grid();
   shape.display();
-  //shape.moving();
+  shape.moving();
 }
 
 void keyPressed() {

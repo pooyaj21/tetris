@@ -14,8 +14,8 @@ class Shape {
   private int [][][] pieceRotate = { o, i, t, j, l, s, z};
   private color [] pieceColor = {#cdcd00, #00cdcd, #9a00cd, #0000cd, #cd6600, #00cd00, #cd0000};
   private int rotateCount=0;
-  int tetrisGod =3; //debug
-  //int tetrisGod =(int)random(7);
+  //int tetrisGod =6; //debug
+  int tetrisGod =(int)random(7);
   int time=1;
 
   void display() {
@@ -51,6 +51,7 @@ class Shape {
 
   void rotate() {
     if (tetrisGod!=0) {
+      if (checkCollision("")){
       for (int j=0; j<2; j++) {
         int [][][] rotated = new int[7][4][2];
         if (rotateCount%4==0) {
@@ -81,6 +82,7 @@ class Shape {
       }
       collisionForRotate(rotateCount);
       rotateCount++;
+    }
     }
   }
 
@@ -136,7 +138,7 @@ class Shape {
         piece[tetrisGod][i][0]=piece[tetrisGod][i][0]-2;
       }
     }
-    
+
     //rotation t piece
     if (tetrisGod==2 && rotateCount%4==3 && piece[tetrisGod][1][0]==0) {
       for (int i=0; i<4; i++) {
@@ -148,15 +150,76 @@ class Shape {
         piece[tetrisGod][i][0]--;
       }
     }
-    
+
     //rotation j piece
-    if (tetrisGod==3 && rotateCount%4==0 && piece[tetrisGod][0][1]==0) {
+    if (tetrisGod==3 && rotateCount%4==0 && piece[tetrisGod][0][1]==1) {
       for (int i=0; i<4; i++) {
         piece[tetrisGod][i][1]++;
       }
     }
-    
-    //TODO: rotation
+    if (tetrisGod==3 && rotateCount%4==0 && piece[tetrisGod][0][0]<0) {
+      for (int i=0; i<4; i++) {
+        piece[tetrisGod][i][0]++;
+      }
+    }
+    if (tetrisGod==3 && rotateCount%4==1 && piece[tetrisGod][3][0]<0) {
+      for (int i=0; i<4; i++) {
+        piece[tetrisGod][i][0]++;
+      }
+    }
+    if (tetrisGod==3 && rotateCount%4==2 && piece[tetrisGod][0][0]>9) {
+      for (int i=0; i<4; i++) {
+        piece[tetrisGod][i][0]--;
+      }
+    }
+    if (tetrisGod==3 && rotateCount%4==3 && piece[tetrisGod][3][0]>9) {
+      for (int i=0; i<4; i++) {
+        piece[tetrisGod][i][0]--;
+      }
+    }
+    //rotation l piece
+    if (tetrisGod==4 && rotateCount%4==3 && piece[tetrisGod][0][0]<0) {
+      for (int i=0; i<4; i++) {
+        piece[tetrisGod][i][0]++;
+      }
+    }
+    if (tetrisGod==4 && rotateCount%4==1 && piece[tetrisGod][0][0]>9) {
+      for (int i=0; i<4; i++) {
+        piece[tetrisGod][i][0]--;
+      }
+    }
+    //rotation s piece
+    if (tetrisGod==5 && rotateCount%4==0 && piece[tetrisGod][3][1]<0) {
+      for (int i=0; i<4; i++) {
+        piece[tetrisGod][i][1]++;
+      }
+    }
+    if (tetrisGod==5 && rotateCount%4==1 && piece[tetrisGod][3][0]<0) {
+      for (int i=0; i<4; i++) {
+        piece[tetrisGod][i][0]++;
+      }
+    }
+    if (tetrisGod==5 && rotateCount%4==3 && piece[tetrisGod][3][0]>9) {
+      for (int i=0; i<4; i++) {
+        piece[tetrisGod][i][0]--;
+      }
+    }
+    //rotation z piece
+    if (tetrisGod==6 && rotateCount%4==0 && piece[tetrisGod][3][1]<0) {
+      for (int i=0; i<4; i++) {
+        piece[tetrisGod][i][1]++;
+      }
+    }
+    if (tetrisGod==6 && rotateCount%4==1 && piece[tetrisGod][3][0]<0) {
+      for (int i=0; i<4; i++) {
+        piece[tetrisGod][i][0]++;
+      }
+    }
+    if (tetrisGod==6 && rotateCount%4==3 && piece[tetrisGod][3][0]>9) {
+      for (int i=0; i<4; i++) {
+        piece[tetrisGod][i][0]--;
+      }
+    }
   }
 
   void moving () {
