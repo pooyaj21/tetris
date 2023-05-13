@@ -16,12 +16,16 @@ void setup() {
 }
 
 void draw() {
-
   //background(0);
   gamePlay.savedPieces();
   Grid();
   shape.display();
-  shape.moving();
+  if (gamePlay.checkOtherPieces(shape)) {
+    shape.moving();
+  } else shape.draw=false;
+  for (int l = 0; l < 20; l++) {
+    if (gamePlay.checkLineIsfull(l))gamePlay.deletTheFullLine(l);
+  }
   drawSahpe();
 }
 

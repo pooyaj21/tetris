@@ -3,6 +3,7 @@ import java.util.Arrays;
 class Shape {
   int squerSize =height/20;
   Shape newShape;
+  GamePlay gamePlay;
   private int [][] o = {{4, 0}, {5, 0}, {4, 1}, {5, 1}};
   private int [][] i = {{3, 0}, {4, 0}, {5, 0}, {6, 0}};
   private int [][] t = {{3, 1}, {4, 1}, {5, 1}, {4, 0}};
@@ -14,10 +15,10 @@ class Shape {
   private int [][][] pieceRotate = { o, i, t, j, l, s, z};
   private color [] pieceColor = {#cdcd00, #00cdcd, #9a00cd, #0000cd, #cd6600, #00cd00, #cd0000};
   private int rotateCount=0;
-  //int tetrisGod =6; //debug
+  //int tetrisGod =4; //debug
   int tetrisGod =(int)random(7);
   int time=1;
-  
+
   boolean draw;
 
   void display() {
@@ -53,38 +54,38 @@ class Shape {
 
   void rotate() {
     if (tetrisGod!=0) {
-      if (checkCollision("")){
-      for (int j=0; j<2; j++) {
-        int [][][] rotated = new int[7][4][2];
-        if (rotateCount%4==0) {
-          for (int i=0; i<4; i++) {
-            rotated[tetrisGod][i][0] = pieceRotate[tetrisGod][i][1]-piece[tetrisGod][1][0];
-            rotated[tetrisGod][i][1] = -pieceRotate[tetrisGod][i][0]-piece[tetrisGod][1][1];
+      if (checkCollision("")) {
+        for (int j=0; j<2; j++) {
+          int [][][] rotated = new int[7][4][2];
+          if (rotateCount%4==0) {
+            for (int i=0; i<4; i++) {
+              rotated[tetrisGod][i][0] = pieceRotate[tetrisGod][i][1]-piece[tetrisGod][1][0];
+              rotated[tetrisGod][i][1] = -pieceRotate[tetrisGod][i][0]-piece[tetrisGod][1][1];
+            }
           }
-        }
-        if (rotateCount%4==1) {
-          for (int i=0; i<4; i++) {
-            rotated[tetrisGod][i][0] = -pieceRotate[tetrisGod][i][0]-piece[tetrisGod][1][0];
-            rotated[tetrisGod][i][1] = -pieceRotate[tetrisGod][i][1]-piece[tetrisGod][1][1];
+          if (rotateCount%4==1) {
+            for (int i=0; i<4; i++) {
+              rotated[tetrisGod][i][0] = -pieceRotate[tetrisGod][i][0]-piece[tetrisGod][1][0];
+              rotated[tetrisGod][i][1] = -pieceRotate[tetrisGod][i][1]-piece[tetrisGod][1][1];
+            }
           }
-        }
-        if (rotateCount%4==2) {
-          for (int i=0; i<4; i++) {
-            rotated[tetrisGod][i][0] = -pieceRotate[tetrisGod][i][1]-piece[tetrisGod][1][0];
-            rotated[tetrisGod][i][1] = pieceRotate[tetrisGod][i][0]-piece[tetrisGod][1][1];
+          if (rotateCount%4==2) {
+            for (int i=0; i<4; i++) {
+              rotated[tetrisGod][i][0] = -pieceRotate[tetrisGod][i][1]-piece[tetrisGod][1][0];
+              rotated[tetrisGod][i][1] = pieceRotate[tetrisGod][i][0]-piece[tetrisGod][1][1];
+            }
           }
-        }
-        if (rotateCount%4==3) {
-          for (int i=0; i<4; i++) {
-            rotated[tetrisGod][i][0] = pieceRotate[tetrisGod][i][0]-piece[tetrisGod][1][0];
-            rotated[tetrisGod][i][1] = pieceRotate[tetrisGod][i][1]-piece[tetrisGod][1][1];
+          if (rotateCount%4==3) {
+            for (int i=0; i<4; i++) {
+              rotated[tetrisGod][i][0] = pieceRotate[tetrisGod][i][0]-piece[tetrisGod][1][0];
+              rotated[tetrisGod][i][1] = pieceRotate[tetrisGod][i][1]-piece[tetrisGod][1][1];
+            }
           }
+          piece = rotated ;
         }
-        piece = rotated ;
+        collisionForRotate(rotateCount);
+        rotateCount++;
       }
-      collisionForRotate(rotateCount);
-      rotateCount++;
-    }
     }
   }
 
@@ -229,10 +230,10 @@ class Shape {
       move("d");
     }
     for (int i=0; i<4; i++) {
-    if (piece[tetrisGod][i][1]==19) {
+      if (piece[tetrisGod][i][1]==19) {
         draw = false;
       }
     }
-    time++;
+          time++;
   }
 }
