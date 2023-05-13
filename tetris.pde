@@ -1,20 +1,37 @@
 Shape shape;
+Shape newShape;
+GamePlay gamePlay;
 
 int spawnX=50;
 int spawnY=50;
 int tetrisGod;
+public int squerSize =height/20;
 
 void setup() {
   size(650, 900);
   shape = new Shape();
+  shape.draw=true;
+  newShape = new Shape();
+  gamePlay = new GamePlay();
 }
 
 void draw() {
 
-  background(0);
+  //background(0);
+  gamePlay.savedPieces();
   Grid();
   shape.display();
   shape.moving();
+  drawSahpe();
+}
+
+void drawSahpe() {
+  if (!(shape.draw)) {
+    gamePlay.makeShape(shape);
+    shape= newShape;
+    shape.draw=true;
+    newShape = new Shape();
+  }
 }
 
 void keyPressed() {
@@ -29,8 +46,8 @@ void keyPressed() {
   }
 }
 
-void keyReleased(){
-    if (keyCode == UP || key == 'w'||key == 'W') {
+void keyReleased() {
+  if (keyCode == UP || key == 'w'||key == 'W') {
     shape.rotate();
   }
 }

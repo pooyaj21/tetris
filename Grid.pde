@@ -10,7 +10,7 @@ int squerSize =height/20;
       k=i-j*10;
     }
     
-    fill(0);
+    noFill();
     stroke(255);
     rect(squerSize * k, squerSize * j, height/20, height/20);
     

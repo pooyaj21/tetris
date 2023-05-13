@@ -17,6 +17,8 @@ class Shape {
   //int tetrisGod =6; //debug
   int tetrisGod =(int)random(7);
   int time=1;
+  
+  boolean draw;
 
   void display() {
 
@@ -133,7 +135,7 @@ class Shape {
         piece[tetrisGod][i][0]--;
       }
     }
-    if (tetrisGod==1 && rotateCount%4==3 && piece[tetrisGod][3][0]>10) {
+    if (tetrisGod==1 && rotateCount%4==3 && piece[tetrisGod][3][0]>9) {
       for (int i=0; i<4; i++) {
         piece[tetrisGod][i][0]=piece[tetrisGod][i][0]-2;
       }
@@ -225,6 +227,11 @@ class Shape {
   void moving () {
     if (time%60 == 0) {
       move("d");
+    }
+    for (int i=0; i<4; i++) {
+    if (piece[tetrisGod][i][1]==19) {
+        draw = false;
+      }
     }
     time++;
   }
