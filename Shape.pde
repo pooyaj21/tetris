@@ -19,7 +19,7 @@ public class Shape {
   int time=1;
   boolean draw;
 
-  int lineColor=255;
+  int lineColor;
 
   void display() {
 

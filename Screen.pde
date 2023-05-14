@@ -3,8 +3,8 @@ public class Screen {
   int squerSize =height/20;
   int j=0;
   
-  int lineColor=255;
-  int insideColor=0;
+  int lineColor;
+  int insideColor;
   
   public void display() {
     for (int i = 0; i < 200; i++) {

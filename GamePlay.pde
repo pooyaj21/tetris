@@ -1,4 +1,4 @@
-import java.util.Arrays;
+
 public class GamePlay {
 
   private color[][] piecePlacedColor= new color[10][20];
@@ -10,16 +10,26 @@ public class GamePlay {
   int shapeY;
   int point;
 
-  int lineColor=255;
-  int insideColor=0;
+  int lineColor;
+  int insideColor;
   int time;
 
   public GamePlay() {
-      for (int i=0; i<10; i++) {
-        for (int j=0; j<20; j++) {
-          piecePlacedColor[i][j]=insideColor;
-        }
+    for (int i=0; i<10; i++) {
+      for (int j=0; j<20; j++) {
+        piecePlacedColor[i][j]=insideColor;
       }
+    }
+  }
+
+  public void changeColor(boolean isDarkMood) {
+    for (int i=0; i<10; i++) {
+      for (int j=0; j<20; j++) {
+        if (!isDarkMood) {
+          if (piecePlacedColor[i][j]==0)piecePlacedColor[i][j]=255;
+        } else if (piecePlacedColor[i][j]==255)piecePlacedColor[i][j]=0;
+      }
+    }
   }
 
 
@@ -118,5 +128,16 @@ public class GamePlay {
         noLoop();
       }
     }
+  }
+
+  public boolean canMove(Shape shape ,String direction) {
+    int wichShape = shape.tetrisGod;
+    for (int k=0; k<4; k++) {
+      shapeX=shape.piece[wichShape][k][0];
+      shapeY=shape.piece[wichShape][k][1];
+      if (direction.equals("l") && shapeX>0 && piecePlacedColor[shapeX-1][shapeY]!=insideColor)return false;
+      if (direction.equals("r") && shapeX<9 && piecePlacedColor[shapeX+1][shapeY]!=insideColor)return false;
+    }
+    return true;
   }
 }
