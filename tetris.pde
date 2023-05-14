@@ -23,9 +23,6 @@ void draw() {
   if (gamePlay.checkOtherPieces(shape)) {
     shape.moving();
   } else shape.draw=false;
-  for (int l = 0; l < 20; l++) {
-    if (gamePlay.checkLineIsfull(l))gamePlay.deletTheFullLine(l);
-  }
   drawSahpe();
 }
 

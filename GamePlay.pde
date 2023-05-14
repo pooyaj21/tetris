@@ -24,7 +24,6 @@ public class GamePlay {
         j++;
       }
     }
-    
   }
 
   public void makeShape(Shape shape) {
@@ -35,6 +34,9 @@ public class GamePlay {
       piecePlacedColor[shapeX][shapeY] = shape.pieceColor[wichShape];
     }
 
+    for (int l = 0; l < 20; l++) {
+      if (gamePlay.checkLineIsfull(l))gamePlay.deletTheFullLine(l);
+    }
   }
 
   public boolean checkOtherPieces(Shape shape) {
@@ -49,19 +51,25 @@ public class GamePlay {
     return true;
   }
 
-  public void deletTheFullLine(int line){
+  public void deletTheFullLine(int line) {
     color[][] newPiecePlaceMent= new color[10][20];
     for (int i=0; i<10; i++) {
-      for (int j=0; j<line; j++) {
+      for (int j=0; j<20; j++) {
         newPiecePlaceMent[i][j]=piecePlacedColor[i][j];
       }
     }
-    for (int k=line; k>=1; k--) {
+    for (int k=line; k>19; k++) {
+      for (int l=0; l<10; l++) {
+        newPiecePlaceMent[l][k]=piecePlacedColor[l][k+1];
+      }
+    }
+    for (int k=line; k>0; k--) {
       for (int l=0; l<10; l++) {
         newPiecePlaceMent[l][k]=piecePlacedColor[l][k-1];
       }
     }
-    piecePlacedColor=newPiecePlaceMent;
+        piecePlacedColor=newPiecePlaceMent;
+
   }
 
   public boolean checkLineIsfull(int line) {
@@ -70,6 +78,4 @@ public class GamePlay {
     }
     return true;
   }
- 
-  
 }
