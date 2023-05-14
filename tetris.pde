@@ -1,29 +1,36 @@
 Shape shape;
 Shape newShape;
 GamePlay gamePlay;
+Screen baseScreen;
 
 int spawnX=50;
 int spawnY=50;
 int tetrisGod;
+
+boolean darkMood = true;
 public int squerSize =height/20;
 
 void setup() {
-  size(650, 900);
+  size(750, 900);
   shape = new Shape();
   shape.draw=true;
   newShape = new Shape();
   gamePlay = new GamePlay();
+  baseScreen = new Screen();
 }
 
 void draw() {
-  //background(0);
   gamePlay.savedPieces();
-  Grid();
+  baseScreen.display();
   shape.display();
+  baseScreen.showNextPiece(newShape, newShape.tetrisGod);
+  baseScreen.showPoint(gamePlay);
   if (gamePlay.checkOtherPieces(shape)) {
-    shape.moving();
+  shape.moving();
+  gamePlay.level(shape);
   } else shape.draw=false;
   drawSahpe();
+  gamePlay.lose();
 }
 
 void drawSahpe() {
@@ -50,5 +57,22 @@ void keyPressed() {
 void keyReleased() {
   if (keyCode == UP || key == 'w'||key == 'W') {
     shape.rotate();
+  }
+  if(key == 'P'|| key == 'p'){
+    if (darkMood){
+      gamePlay.lineColor=255;
+      gamePlay.insideColor=0;
+      baseScreen.lineColor=255;
+      baseScreen.insideColor=0;
+      shape.lineColor=255;
+      darkMood=false;
+    }else{
+      gamePlay.lineColor=0;
+      gamePlay.insideColor=255;
+      baseScreen.lineColor=0;
+      baseScreen.insideColor=255;
+      shape.lineColor=0;
+      darkMood=true;
+    }
   }
 }

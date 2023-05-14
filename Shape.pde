@@ -1,6 +1,5 @@
-import java.util.Arrays;
+public class Shape {
 
-class Shape {
   int squerSize =height/20;
   Shape newShape;
   GamePlay gamePlay;
@@ -15,15 +14,17 @@ class Shape {
   private int [][][] pieceRotate = { o, i, t, j, l, s, z};
   private color [] pieceColor = {#cdcd00, #00cdcd, #9a00cd, #0000cd, #cd6600, #00cd00, #cd0000};
   private int rotateCount=0;
-  //int tetrisGod =4; //debug
+  //int tetrisGod =1; //debug
   int tetrisGod =(int)random(7);
   int time=1;
-
   boolean draw;
+
+  int lineColor=255;
 
   void display() {
 
     for (int i=0; i<4; i++) {
+      stroke(lineColor);
       fill(pieceColor[tetrisGod]);
       rect(piece[tetrisGod][i][0]*squerSize, piece[tetrisGod][i][1]*squerSize, squerSize, squerSize);
     }
@@ -234,6 +235,6 @@ class Shape {
         draw = false;
       }
     }
-          time++;
+    time++;
   }
 }

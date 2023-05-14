@@ -1,10 +1,27 @@
+import java.util.Arrays;
 public class GamePlay {
 
   private color[][] piecePlacedColor= new color[10][20];
+
+
   int squerSize =height/20;
   int pieceColor;
   int shapeX;
   int shapeY;
+  int point;
+
+  int lineColor=255;
+  int insideColor=0;
+  int time;
+
+  public GamePlay() {
+      for (int i=0; i<10; i++) {
+        for (int j=0; j<20; j++) {
+          piecePlacedColor[i][j]=insideColor;
+        }
+      }
+  }
+
 
   public void savedPieces() {
     int j=0;
@@ -17,7 +34,7 @@ public class GamePlay {
       }
 
       fill(piecePlacedColor[k][j]);
-      stroke(255);
+      stroke(lineColor);
       rect(squerSize * k, squerSize * j, height/20, height/20);
 
       if ((i+1) % 10==0) {
@@ -45,7 +62,7 @@ public class GamePlay {
       shapeX=shape.piece[wichShape][i][0];
       shapeY=shape.piece[wichShape][i][1];
       if (shapeY<19) {
-        if (piecePlacedColor[shapeX][shapeY+1]!= 0) return false;
+        if (piecePlacedColor[shapeX][shapeY+1]!= insideColor) return false;
       }
     }
     return true;
@@ -53,6 +70,11 @@ public class GamePlay {
 
   public void deletTheFullLine(int line) {
     color[][] newPiecePlaceMent= new color[10][20];
+    for (int i=0; i<10; i++) {
+      for (int j=0; j<20; j++) {
+        newPiecePlaceMent[i][j]=insideColor;
+      }
+    }
     for (int i=0; i<10; i++) {
       for (int j=0; j<20; j++) {
         newPiecePlaceMent[i][j]=piecePlacedColor[i][j];
@@ -68,14 +90,33 @@ public class GamePlay {
         newPiecePlaceMent[l][k]=piecePlacedColor[l][k-1];
       }
     }
-        piecePlacedColor=newPiecePlaceMent;
-
+    piecePlacedColor=newPiecePlaceMent;
+    point++;
   }
 
   public boolean checkLineIsfull(int line) {
     for (int i=0; i<10; i++) {
-      if (piecePlacedColor[i][line]==0)return false;
+      if (piecePlacedColor[i][line]==insideColor)return false;
     }
     return true;
+  }
+
+  public void level(Shape shape) {
+    for (int j=0; j<gamePlay.point; j++) {
+      shape.moving();
+    }
+  }
+  public void lose() {
+    for (int l=0; l<10; l++) {
+      if (piecePlacedColor[l][0]!=insideColor) {
+        rectMode(CENTER);
+        fill(insideColor);
+        rect(width/2, height/2, 300, 100);
+        textAlign(CENTER, CENTER);
+        fill(lineColor);
+        text("You Lost!!", width/2, height/2);
+        noLoop();
+      }
+    }
   }
 }
