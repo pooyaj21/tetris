@@ -4,7 +4,7 @@ public class GamePlay {
   private color[][] piecePlacedColor= new color[10][20];
 
 
-  int squerSize =height/20;
+    int squerSize =height/20;
   int pieceColor;
   int shapeX;
   int shapeY;
@@ -32,6 +32,21 @@ public class GamePlay {
     }
   }
 
+  public boolean canRotate(Shape shape) {
+    shape.rotate();
+    int wichShape = shape.tetrisGod;
+    for (int i=0; i<4; i++) {
+      shapeX=shape.piece[wichShape][i][0];
+      shapeY=shape.piece[wichShape][i][1];
+      if (piecePlacedColor[shapeX][shapeY] != insideColor) {
+        shape.rotate();
+        shape.rotate();
+        return false;
+      }
+    }
+    shape.rotate();
+    return true;
+  }
 
   public void savedPieces() {
     int j=0;
@@ -52,6 +67,7 @@ public class GamePlay {
       }
     }
   }
+
 
   public void makeShape(Shape shape) {
     int wichShape = shape.tetrisGod;
@@ -77,6 +93,8 @@ public class GamePlay {
     }
     return true;
   }
+
+
 
   public void deletTheFullLine(int line) {
     color[][] newPiecePlaceMent= new color[10][20];
@@ -130,7 +148,7 @@ public class GamePlay {
     }
   }
 
-  public boolean canMove(Shape shape ,String direction) {
+  public boolean canMove(Shape shape, String direction) {
     int wichShape = shape.tetrisGod;
     for (int k=0; k<4; k++) {
       shapeX=shape.piece[wichShape][k][0];

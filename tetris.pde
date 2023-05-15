@@ -45,10 +45,10 @@ void drawSahpe() {
 
 void keyPressed() {
   if (keyCode == RIGHT || key == 'd'||key == 'D') {
-    if (gamePlay.canMove(shape,"r")) shape.move("r");
+    if (gamePlay.canMove(shape, "r")) shape.move("r");
   }
   if (keyCode == LEFT || key == 'a'||key == 'A') {
-    if (gamePlay.canMove(shape,"l")) shape.move("l");
+    if (gamePlay.canMove(shape, "l")) shape.move("l");
   }
   if (keyCode == DOWN || key == 's'||key == 'S') {
     shape.move("d");
@@ -57,7 +57,8 @@ void keyPressed() {
 
 void keyReleased() {
   if (keyCode == UP || key == 'w'||key == 'W') {
-    shape.rotate();
+    if (gamePlay.canRotate(shape))shape.rotate();
+    else shape.rotate();
   }
   if (key == 'P'|| key == 'p') {
     darkMood = !darkMood;
