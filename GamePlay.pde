@@ -4,7 +4,7 @@ public class GamePlay {
   private color[][] piecePlacedColor= new color[10][20];
 
 
-    int squerSize =height/20;
+  int squerSize =height/20;
   int pieceColor;
   int shapeX;
   int shapeY;
@@ -13,6 +13,7 @@ public class GamePlay {
   int lineColor;
   int insideColor;
   int time;
+ 
 
   public GamePlay() {
     for (int i=0; i<10; i++) {
@@ -143,6 +144,7 @@ public class GamePlay {
         textAlign(CENTER, CENTER);
         fill(lineColor);
         text("You Lost!!", width/2, height/2);
+        start=true;
         noLoop();
       }
     }

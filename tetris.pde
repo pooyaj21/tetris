@@ -8,12 +8,9 @@ PImage resetBottemB;
 PImage moon;
 PImage sun;
 
-int spawnX=50;
-int spawnY=50;
-int tetrisGod;
-
+boolean start;
 boolean darkMood = true;
-public int squerSize =height/20;
+int squerSize =height/20;
 
 void setup() {
   size(750, 900);
@@ -26,18 +23,20 @@ void setup() {
 
 void draw() {
   darkMood();
-  gamePlay.savedPieces();
-  baseScreen.display();
-  shape.display();
-  baseScreen.showNextPiece(newShape, newShape.tetrisGod);
-  baseScreen.showPoint(gamePlay);
-  if (gamePlay.checkOtherPieces(shape)) {
-    shape.moving();
-    gamePlay.level(shape);
-  } else shape.draw=false;
-  drawSahpe();
-  gamePlay.lose();
-  darkModeVisula();
+  if (!start) {
+    gamePlay.savedPieces();
+    baseScreen.display();
+    shape.display();
+    baseScreen.showNextPiece(newShape, newShape.tetrisGod);
+    baseScreen.showPoint(gamePlay);
+    if (gamePlay.checkOtherPieces(shape)) {
+      shape.moving();
+      gamePlay.level(shape);
+    } else shape.draw=false;
+    drawSahpe();
+    gamePlay.lose();
+    darkModeVisula();
+  }
 }
 
 void drawSahpe() {
@@ -114,4 +113,5 @@ void reset() {
   newShape = new Shape();
   gamePlay = new GamePlay();
   baseScreen = new Screen();
+  start=false;
 }
