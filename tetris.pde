@@ -3,6 +3,11 @@ Shape newShape;
 GamePlay gamePlay;
 Screen baseScreen;
 
+PImage resetBottemW;
+PImage resetBottemB;
+PImage moon;
+PImage sun;
+
 int spawnX=50;
 int spawnY=50;
 int tetrisGod;
@@ -32,6 +37,7 @@ void draw() {
   } else shape.draw=false;
   drawSahpe();
   gamePlay.lose();
+  darkModeVisula();
 }
 
 void drawSahpe() {
@@ -60,8 +66,28 @@ void keyReleased() {
     if (gamePlay.canRotate(shape))shape.rotate();
     else shape.rotate();
   }
-  if (key == 'P'|| key == 'p') {
-    darkMood = !darkMood;
+}
+
+void mousePressed() {
+  if (mouseX > 7*(squerSize*13) && mouseX < (7*(squerSize*13))+squerSize*12 && mouseY < squerSize*12)darkMood = !darkMood;
+  if (mouseX > width-(squerSize*12) && mouseY < squerSize*12)reset();
+}
+
+void darkModeVisula() {
+  if (darkMood) {
+    sun = loadImage("sun.png");
+    sun.resize(squerSize*12, squerSize*12);
+    image(sun, 7*(squerSize*13), 0);
+    resetBottemW = loadImage("resetW.png");
+    resetBottemW.resize(squerSize*13, squerSize*13);
+    image(resetBottemW, width-(squerSize*12), -5);
+  } else {
+    moon = loadImage("moon.png");
+    moon.resize(squerSize*12, squerSize*12);
+    image(moon, 7*(squerSize*13), 0);
+    resetBottemB = loadImage("resetB.png");
+    resetBottemB.resize(squerSize*13, squerSize*11);
+    image(resetBottemB, width-(squerSize*12), 0);
   }
 }
 
@@ -80,4 +106,12 @@ void darkMood() {
     gamePlay.lineColor=0;
     gamePlay.insideColor=255;
   }
+}
+
+void reset() {
+  shape = new Shape();
+  shape.draw=true;
+  newShape = new Shape();
+  gamePlay = new GamePlay();
+  baseScreen = new Screen();
 }
