@@ -2,7 +2,6 @@ public class Shape {
 
   int squerSize =height/20;
   Shape newShape;
-  GamePlay gamePlay;
   private int [][] o = {{4, 0}, {5, 0}, {4, 1}, {5, 1}};
   private int [][] i = {{3, 0}, {4, 0}, {5, 0}, {6, 0}};
   private int [][] t = {{3, 1}, {4, 1}, {5, 1}, {4, 0}};
@@ -20,6 +19,7 @@ public class Shape {
   boolean draw;
 
   int lineColor;
+  int level=0;
 
   void display() {
 

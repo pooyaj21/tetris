@@ -13,7 +13,7 @@ public class GamePlay {
   int lineColor;
   int insideColor;
   int time;
- 
+
 
   public GamePlay() {
     for (int i=0; i<10; i++) {
@@ -111,7 +111,7 @@ public class GamePlay {
     }
     for (int k=line; k>19; k++) {
       for (int l=0; l<10; l++) {
-        newPiecePlaceMent[l][k]=piecePlacedColor[l][k+1];
+        newPiecePlaceMent[l][k]=piecePlacedColor[l][k];
       }
     }
     for (int k=line; k>0; k--) {

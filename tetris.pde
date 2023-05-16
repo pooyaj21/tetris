@@ -1,16 +1,31 @@
+import processing.sound.*;
+
 Shape shape;
 Shape newShape;
 GamePlay gamePlay;
 Screen baseScreen;
+
+SoundFile themMusic;
+SoundFile o;
+SoundFile i;
+SoundFile t;
+SoundFile j;
+SoundFile l;
+SoundFile s;
+SoundFile z;
+
 
 PImage resetBottemW;
 PImage resetBottemB;
 PImage moon;
 PImage sun;
 
+boolean soundPlayed;
+boolean themPlayed;
 boolean start;
 boolean darkMood = true;
 int squerSize =height/20;
+float amplitude =0.2;
 
 void setup() {
   size(750, 900);
@@ -19,6 +34,15 @@ void setup() {
   newShape = new Shape();
   gamePlay = new GamePlay();
   baseScreen = new Screen();
+  themMusic= new SoundFile (this, "assets/tetrisTheme.mp3");
+  o= new SoundFile (this, "assets/O.mp3");
+  i= new SoundFile (this, "assets/I.mp3");
+  t= new SoundFile (this, "assets/T.mp3");
+  j= new SoundFile (this, "assets/J.mp3");
+  l= new SoundFile (this, "assets/L.mp3");
+  s= new SoundFile (this, "assets/S.mp3");
+  z= new SoundFile (this, "assets/Z.mp3");
+  //themMusic.loop();
 }
 
 void draw() {
@@ -31,11 +55,12 @@ void draw() {
     baseScreen.showPoint(gamePlay);
     if (gamePlay.checkOtherPieces(shape)) {
       shape.moving();
-      gamePlay.level(shape);
+      //if (!soundPlayed) music(shape);
     } else shape.draw=false;
     drawSahpe();
     gamePlay.lose();
     darkModeVisula();
+    gamePlay.level(shape);
   }
 }
 
@@ -45,6 +70,7 @@ void drawSahpe() {
     shape= newShape;
     shape.draw=true;
     newShape = new Shape();
+    soundPlayed = false;
   }
 }
 
@@ -55,15 +81,15 @@ void keyPressed() {
   if (keyCode == LEFT || key == 'a'||key == 'A') {
     if (gamePlay.canMove(shape, "l")) shape.move("l");
   }
-  if (keyCode == DOWN || key == 's'||key == 'S') {
-    shape.move("d");
-  }
 }
 
 void keyReleased() {
   if (keyCode == UP || key == 'w'||key == 'W') {
     if (gamePlay.canRotate(shape))shape.rotate();
     else shape.rotate();
+  }
+  if (keyCode == DOWN || key == 's'||key == 'S') {
+    shape.move("d");
   }
 }
 
@@ -74,17 +100,17 @@ void mousePressed() {
 
 void darkModeVisula() {
   if (darkMood) {
-    sun = loadImage("sun.png");
+    sun = loadImage("assets/sun.png");
     sun.resize(squerSize*12, squerSize*12);
     image(sun, 7*(squerSize*13), 0);
-    resetBottemW = loadImage("resetW.png");
+    resetBottemW = loadImage("assets/resetW.png");
     resetBottemW.resize(squerSize*13, squerSize*13);
     image(resetBottemW, width-(squerSize*12), -5);
   } else {
-    moon = loadImage("moon.png");
+    moon = loadImage("assets/moon.png");
     moon.resize(squerSize*12, squerSize*12);
     image(moon, 7*(squerSize*13), 0);
-    resetBottemB = loadImage("resetB.png");
+    resetBottemB = loadImage("assets/resetB.png");
     resetBottemB.resize(squerSize*13, squerSize*11);
     image(resetBottemB, width-(squerSize*12), 0);
   }
@@ -113,5 +139,17 @@ void reset() {
   newShape = new Shape();
   gamePlay = new GamePlay();
   baseScreen = new Screen();
+  soundPlayed = false;
   start=false;
+}
+
+void music(Shape shape) {
+  if (shape.tetrisGod==0) o.play();
+  if (shape.tetrisGod==1) i.play();
+  if (shape.tetrisGod==2) t.play();
+  if (shape.tetrisGod==3) j.play();
+  if (shape.tetrisGod==4) l.play();
+  if (shape.tetrisGod==5) s.play();
+  if (shape.tetrisGod==6) z.play();
+  soundPlayed=true;
 }
