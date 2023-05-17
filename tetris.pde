@@ -20,6 +20,7 @@ PImage resetBottemB;
 PImage moon;
 PImage sun;
 
+boolean meme;
 boolean soundPlayed;
 boolean themPlayed;
 boolean start;
@@ -42,7 +43,7 @@ void setup() {
   l= new SoundFile (this, "assets/L.mp3");
   s= new SoundFile (this, "assets/S.mp3");
   z= new SoundFile (this, "assets/Z.mp3");
-  //themMusic.loop();
+  themMusic.loop();
 }
 
 void draw() {
@@ -55,7 +56,7 @@ void draw() {
     baseScreen.showPoint(gamePlay);
     if (gamePlay.checkOtherPieces(shape)) {
       shape.moving();
-      //if (!soundPlayed) music(shape);
+      if (!soundPlayed && meme) music(shape);
     } else shape.draw=false;
     drawSahpe();
     gamePlay.lose();
@@ -90,6 +91,9 @@ void keyReleased() {
   }
   if (keyCode == DOWN || key == 's'||key == 'S') {
     shape.move("d");
+  }
+    if (key == 'm'||key == 'M') {
+    meme=!meme;
   }
 }
 
